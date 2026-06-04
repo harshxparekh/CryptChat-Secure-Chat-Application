@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CryptChat - Secure Real-Time Chat</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- 🌓 Floating Theme Toggle -->
+  <button id="darkToggle" title="Toggle Theme">🌙</button>
+
+  <!-- 🔐 Centered Header -->
+  <header>
+    <h1 class="brand">
+      🔐 <strong>Crypt</strong><span class="highlight">Chat</span>
+    </h1>
+  </header>
+
+  <!-- ✅ Main Chat Interface -->
+  <div class="chat-container">
+    <!-- Sender Panel -->
+    <div class="panel sender">
+      <h2>Sender</h2>
+      <label for="encryptionMethod" class="dropdown-label">Technique:</label>
+      <select id="encryptionMethod">
+        <option value="rc4" selected>RC4</option>
+        <option value="caesar">Caesar Cipher</option>
+        <option value="monoalphabetic">Monoalphabetic Cipher</option>
+        <option value="polyalphabetic">Polyalphabetic Cipher</option>
+        <option value="railfence">Rail Fence Cipher</option>
+        <option value="columnar">Columnar Cipher</option>
+        <option value="hill">Hill Cipher</option>
+        <option value="playfair">Playfair Cipher</option>
+        <option value="otp">One-Time Pad</option>
+        <option value="des">DES Cipher</option>
+        <option value="aes">AES Cipher</option>
+        <option value="sha256">SHA-256 Hash</option>
+        <option value="dh">Diffie-Hellman Key Exchange</option>
+        <option value="rsa">RSA Cipher</option>
+        <option value="dsa">DSA Signature</option>
+        <option value="ecc">Elliptic Curve Cryptography</option>
+      </select>
+
+      <textarea id="messageInput" placeholder="Type your message here..."></textarea>
+      <input type="text" id="keyInput" placeholder="Enter shared key" />
+
+      <div class="file-upload">
+        <label for="fileInput">Upload File</label>
+        <input type="file" id="fileInput" accept="image/*,video/*" />
+        <div id="selectedFileLabel"></div>
+      </div>
+
+      <!-- DH Result -->
+      <div id="dhContainer">
+        <h3>🔐 Diffie-Hellman Result</h3>
+        <div id="dhOutput">No key generated yet.</div>
+      </div>
+
+      <!-- DSA Result -->
+      <div id="dsaContainer">
+        <h3>📝 DSA Signature Info</h3>
+        <div id="dsaKeys">
+          <label>p: <span id="dsa-p" class="readonly-field"></span></label>
+          <label>q: <span id="dsa-q" class="readonly-field"></span></label>
+          <label>g: <span id="dsa-g" class="readonly-field"></span></label>
+          <label>Private Key (x): <span id="dsa-x" class="readonly-field"></span></label>
+          <label>Public Key (y): <span id="dsa-y" class="readonly-field"></span></label>
+          <label>Ephemeral Key (k): <span id="dsa-k" class="readonly-field"></span></label>
+          <label>Signature r: <span id="dsa-r" class="readonly-field"></span></label>
+          <label>Signature s: <span id="dsa-s" class="readonly-field"></span></label>
+          <label>Verification: <span id="dsa-valid" class="readonly-field"></span></label>
+        </div>
+      </div>
+
+      <!-- ECC Result -->
+      <div id="eccContainer">
+        <h3>🧮 Elliptic Curve Cryptography</h3>
+        <canvas id="eccCanvas" width="400" height="400"></canvas>
+        <div id="eccOutput">
+          <label>Private Key A: <span id="ecc-private" class="readonly-field"></span></label>
+          <label>Public Key A: <span id="ecc-public" class="readonly-field"></span></label>
+          <label>Shared Secret: <span id="ecc-secret" class="readonly-field"></span></label>
+        </div>
+      </div>
+
+      <button id="sendButton">🔐 Encrypt & Send</button>
+    </div>
+
+    <!-- Receiver Panel -->
+    <div class="panel receiver">
+      <h2>Receiver</h2>
+      <div id="chatArea"></div>
+      <input type="text" id="decryptKeyInput" placeholder="Enter shared key" />
+      <button id="decryptButton">🔓 Decrypt Selected Message</button>
+      <div id="mediaPreview"></div>
+    </div>
+  </div>
+
+  <!-- 🔒 Footer -->
+  <footer>
+    © 2025 <strong>hparekh3</strong> — Secure Chat Application |
+    <a href="https://github.com/harshparekh333" target="_blank" style="color: var(--highlight); text-decoration: none;">
+      GitHub
+    </a>
+  </footer>
+  
+  <!-- Toggle Script -->
+  <script>
+    const toggleBtn = document.getElementById('darkToggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    function setIcon() {
+      toggleBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      setIcon();
+    });
+
+    if (prefersDark) {
+      document.body.classList.add('dark');
+    }
+    setIcon();
+  </script>
+
+  <!-- Main Logic -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>

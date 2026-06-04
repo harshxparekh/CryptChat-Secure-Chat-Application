@@ -1,0 +1,14 @@
+{
+  "name": "secure-chat-app",
+  "version": "1.0.0",
+  "description": "A secure real-time chat application with custom RC4 encryption.",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "dependencies": {
+    "ws": "^8.0.0"
+  },
+  "author": "",
+  "license": "MIT"
+}
